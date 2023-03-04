@@ -79,7 +79,7 @@ public class WhatsappRepository {
 
 
     public int createMessage(String content) {
-        Message msg = new Message(++messageId,content);
+        Message msg = new Message(messageId + 5,content);
         return messageId;
     }
 
