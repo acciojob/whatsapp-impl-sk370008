@@ -59,7 +59,7 @@ public class WhatsappRepository {
         String admin = users.get(0).getName();
         Group group;
         String groupName;
-        customGroupCount++;
+
         if(groupsize == 2){
                 groupName = users.get(1).getName();
                 group = new Group(groupName,groupsize);
@@ -67,6 +67,7 @@ public class WhatsappRepository {
                 groupUserMap.put(group,users);
                 return group;
         }else {
+            customGroupCount++;
             groupName = "";
             groupName += "Group " + customGroupCount;
             group = new Group(groupName,groupsize);
