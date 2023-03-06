@@ -20,6 +20,8 @@ public class WhatsappRepository {
     //Stored mobile number of every user
     private HashSet<String> userMobile;
 
+    private List<Group> groups;
+
 
     private int customGroupCount;
     private int messageId;
@@ -84,28 +86,36 @@ public class WhatsappRepository {
     }
 
 
+    //isi se error aarha h shayad
     public int sendMessage(Message message, User sender, Group group) throws Exception {
         //Throw "Group does not exist" if the mentioned group does not exist
         //Throw "You are not allowed to send message" if the sender is not a member of the group
         //If the message is sent successfully, return the final number of messages in that group.
-
+        boolean doesGroupExist = true;
         if (!adminMap.containsKey(group)){
+            doesGroupExist = false;
             throw new Exception ("Group does not exist");
         }
 
         List<User> users = groupUserMap.get(group);
         HashSet<User>  listOfUsers = new HashSet<>();
+        boolean isSenderMember = true;
         for (User user :users){
             listOfUsers.add(user);
         }
         if (!listOfUsers.contains(sender)){
+            isSenderMember = false;
             throw new Exception("You are not allowed to send message");
         }
 
-        List<Message> messages = new ArrayList<>();
-        messages.add(message);
-        senderMap.put(message,sender);
-        groupMessageMap.put(group,messages);
+        if (isSenderMember && doesGroupExist){
+            List<Message> messages = new ArrayList<>();
+            messages.add(message);
+            senderMap.put(message,sender);
+            groupMessageMap.put(group,messages);
+            return groupMessageMap.get(group).size();
+        }
+
         return groupMessageMap.get(group).size();
     }
 
