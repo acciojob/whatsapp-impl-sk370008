@@ -63,7 +63,7 @@ public class WhatsappRepository {
         //If createGroup is called for these userLists in the same order, their group names would be "Group 1", "Evan", and "Group 2" respectively.
 
         int groupsize = users.size();
-        Group group = null;
+        Group group;
         String groupName;
         for(User user:users){
             userMobile.add(user.getMobile());
@@ -87,7 +87,7 @@ public class WhatsappRepository {
             groupUserMap.put(group,users);
             return group;
         }
-        return group;
+        return new Group("",1);
     }
 
 
