@@ -80,7 +80,7 @@ public class WhatsappRepository {
         }else if (groupsize > 2){
             customGroupCount++;
             groupName = "";
-            groupName += "Group " + customGroupCount;
+            groupName += "Group" + customGroupCount;
             group = new Group(groupName,groupsize);
             groups.add(group);
             adminMap.put(group,users.get(0));
