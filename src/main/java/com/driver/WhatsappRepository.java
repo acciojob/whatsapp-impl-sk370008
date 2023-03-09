@@ -130,6 +130,9 @@ public class WhatsappRepository {
                 isSenderMember = true;
             }
         }
+        if (!isSenderMember){
+            throw new Exception("You are not allowed to send message");
+        }
 
         if (isSenderMember && doesGroupExist){
             List<Message> messages = new ArrayList<>();
