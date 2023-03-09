@@ -69,7 +69,7 @@ public class WhatsappRepository {
         }else {
             customGroupCount++;
             groupName = "";
-            groupName += "Group " + customGroupCount;
+            groupName += "Group" + customGroupCount;
             group = new Group(groupName,groupsize);
             adminMap.put(group,users.get(0));
             groupUserMap.put(group,users);
