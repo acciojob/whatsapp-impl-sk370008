@@ -87,7 +87,7 @@ public class WhatsappRepository {
             groupUserMap.put(group,users);
             return group;
         }
-        return new Group("",1);
+        else return null;
     }
 
 
@@ -104,7 +104,6 @@ public class WhatsappRepository {
         boolean doesGroupExist = false;
         if (adminMap.containsKey(group)){
             doesGroupExist = true;
-            throw new Exception ("Group does not exist");
         }
         for (Group group1 :groups){
             if (group1.equals(group)){
