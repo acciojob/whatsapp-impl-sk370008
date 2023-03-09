@@ -12,4 +12,6 @@ public class User {
     public String getName(){
         return this.name;
     }
+
+    public String getMobile(){return this.mobile;}
 }
