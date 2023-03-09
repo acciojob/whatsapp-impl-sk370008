@@ -88,8 +88,9 @@ public class WhatsappRepository {
         //Throw "Group does not exist" if the mentioned group does not exist
         //Throw "You are not allowed to send message" if the sender is not a member of the group
         //If the message is sent successfully, return the final number of messages in that group.
-
+        boolean doesGroupExist = true;
         if (!adminMap.containsKey(group)){
+            doesGroupExist = false;
             throw new Exception ("Group does not exist");
         }
 
@@ -98,7 +99,7 @@ public class WhatsappRepository {
         for (User user :users){
             listOfUsers.add(user);
         }
-        if (!listOfUsers.contains(sender)){
+        if (doesGroupExist && !listOfUsers.contains(sender)){
             throw new Exception("You are not allowed to send message");
         }
 
