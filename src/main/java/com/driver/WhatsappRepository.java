@@ -58,13 +58,13 @@ public class WhatsappRepository {
         //If createGroup is called for these userLists in the same order, their group names would be "Group 1", "Evan", and "Group 2" respectively.
 
         int groupsize = users.size();
-        String admin = users.get(0).getName();
         Group group;
         String groupName;
 
         if(groupsize == 2){
                 groupName = users.get(1).getName();
                 group = new Group(groupName,groupsize);
+                groups.add(group);
                 adminMap.put(group,users.get(0));
                 groupUserMap.put(group,users);
                 return group;
@@ -73,6 +73,7 @@ public class WhatsappRepository {
             groupName = "";
             groupName += "Group " + customGroupCount;
             group = new Group(groupName,groupsize);
+            groups.add(group);
             adminMap.put(group,users.get(0));
             groupUserMap.put(group,users);
             return group;
@@ -86,15 +87,22 @@ public class WhatsappRepository {
     }
 
 
-    //isi se error aarha h shayad
     public int sendMessage(Message message, User sender, Group group) throws Exception {
         //Throw "Group does not exist" if the mentioned group does not exist
         //Throw "You are not allowed to send message" if the sender is not a member of the group
         //If the message is sent successfully, return the final number of messages in that group.
-        boolean doesGroupExist = true;
-        if (!adminMap.containsKey(group)){
-            doesGroupExist = false;
-            throw new Exception ("Group does not exist");
+        boolean doesGroupExist = false;
+//        if (!adminMap.containsKey(group)){
+//            doesGroupExist = false;
+//            throw new Exception ("Group does not exist");
+//        }
+        for (Group group1 :groups){
+            if (group1.equals(group)){
+                doesGroupExist = true;
+            }
+        }
+        if (!doesGroupExist){
+            throw new Exception("Group does not exist");
         }
 
         List<User> users = groupUserMap.get(group);
@@ -116,7 +124,7 @@ public class WhatsappRepository {
             return groupMessageMap.get(group).size();
         }
 
-        return groupMessageMap.get(group).size();
+        return groupMessageMap.get(group).size()-1;
     }
 
 
