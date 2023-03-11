@@ -94,19 +94,29 @@ public class WhatsappRepository {
             throw new Exception ("Group does not exist");
         }
 
+        boolean isSenderinGroup = false;
+
+
         List<User> users = groupUserMap.get(group);
-        HashSet<User>  listOfUsers = new HashSet<>();
-        for (User user :users){
-            listOfUsers.add(user);
+        for (User user:users){
+            if (user.equals(sender)){
+                isSenderinGroup = true;
+            }
         }
-        if (doesGroupExist && !listOfUsers.contains(sender)){
+        //is ko hatana hai
+//        HashSet<User>  listOfUsers = new HashSet<>();
+//        for (User user :users){
+//            listOfUsers.add(user);
+//        }
+        if (!isSenderinGroup){
             throw new Exception("You are not allowed to send message");
         }
-
-        List<Message> messages = new ArrayList<>();
-        messages.add(message);
-        senderMap.put(message,sender);
-        groupMessageMap.put(group,messages);
+        if (doesGroupExist && isSenderinGroup) {
+            List<Message> messages = new ArrayList<>();
+            messages.add(message);
+            senderMap.put(message, sender);
+            groupMessageMap.put(group, messages);
+        }
         return groupMessageMap.get(group).size();
     }
 
