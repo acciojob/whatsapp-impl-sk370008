@@ -64,6 +64,7 @@ public class WhatsappRepository {
             groupName = users.get(1).getName();
             group = new Group(groupName,groupsize);
             adminMap.put(group,users.get(0));
+            customGroupCount++;
 //            groupUserMap.put(group,users);
             return group;
         }else {
@@ -103,11 +104,6 @@ public class WhatsappRepository {
                 isSenderinGroup = true;
             }
         }
-        //is ko hatana hai
-//        HashSet<User>  listOfUsers = new HashSet<>();
-//        for (User user :users){
-//            listOfUsers.add(user);
-//        }
         if (!isSenderinGroup){
             throw new Exception("You are not allowed to send message");
         }
