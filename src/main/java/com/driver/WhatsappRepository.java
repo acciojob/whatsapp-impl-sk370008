@@ -118,6 +118,7 @@ public class WhatsappRepository {
             if (groupMessageMap.get(group).size() == 0){
                 List<Message> messages = new ArrayList<>();
                 messages.add(message);
+                groupMessageMap.get(group).add(message);
             }else {
                 groupMessageMap.get(group).add(message);
             }
