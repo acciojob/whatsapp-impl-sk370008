@@ -9,6 +9,7 @@ public class WhatsappRepository {
 
     //Assume that each user belongs to at most one group
     //You can use the below mentioned hashmaps or delete these and create your own.
+
     //stores group and its list of users
     private HashMap<Group, List<User>> groupUserMap;
     //stores group and its list of messages
@@ -60,6 +61,12 @@ public class WhatsappRepository {
         Group group;
         String groupName;
 
+        for (User user:users){
+            if(!userMobile.contains(user.getMobile())){
+                userMobile.add(user.getName());
+            }
+        }
+
         if(groupsize == 2){
             groupName = users.get(1).getName();
             group = new Group(groupName,groupsize);
@@ -78,8 +85,8 @@ public class WhatsappRepository {
     }
 
 
-    public int createMessage(String content) {
-        Message msg = new Message(messageId++,content);
+    public int  createMessage(String content) {
+        Message msg = new Message(++messageId,content);
         return messageId;
     }
 
@@ -107,10 +114,16 @@ public class WhatsappRepository {
             throw new Exception("You are not allowed to send message");
         }
         if (doesGroupExist && isSenderinGroup) {
-            List<Message> messages = new ArrayList<>();
-            messages.add(message);
+
+            if (groupMessageMap.get(group).size() == 0){
+                List<Message> messages = new ArrayList<>();
+                messages.add(message);
+            }else {
+                groupMessageMap.get(group).add(message);
+            }
+
             senderMap.put(message, sender);
-            groupMessageMap.put(group, messages);
+//            groupMessageMap.put(group, messages);
         }
         return groupMessageMap.get(group).size();
     }
