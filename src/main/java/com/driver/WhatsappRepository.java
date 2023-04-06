@@ -73,6 +73,7 @@ public class WhatsappRepository {
             group = new Group(groupName,groupsize);
             adminMap.put(group,users.get(0));
             groupUserMap.put(group,users);
+            groupMessageMap.put(group,new ArrayList<>());
             return group;
         }else {
             customGroupCount++;
@@ -81,6 +82,7 @@ public class WhatsappRepository {
             group = new Group(groupName,groupsize);
             adminMap.put(group,users.get(0));
             groupUserMap.put(group,users);
+            groupMessageMap.put(group,new ArrayList<>());
             return group;
         }
     }
@@ -120,13 +122,14 @@ public class WhatsappRepository {
 
         if (isSenderinGroup) {
             if (groupMessageMap.containsKey(group)){
-                if (groupMessageMap.get(group) == null) {
-                    List<Message> messages = new ArrayList<>();
-                    messages.add(message);
-                    groupMessageMap.get(group).add(message);
-                } else {
-                    groupMessageMap.get(group).add(message);
-                }
+//                if (groupMessageMap.get(group) == null) {
+//                    List<Message> messages = new ArrayList<>();
+//                    messages.add(message);
+//                    groupMessageMap.get(group).add(message);
+//                } else {
+//                    groupMessageMap.get(group).add(message);
+//                }
+                groupMessageMap.get(group).add(message);
             }
 
             senderMap.put(message, sender);
