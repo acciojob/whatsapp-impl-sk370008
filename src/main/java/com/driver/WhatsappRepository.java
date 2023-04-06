@@ -22,6 +22,7 @@ public class WhatsappRepository {
     private HashSet<String> userMobile;
 
 
+
     private int customGroupCount;
     private int messageId;
 
@@ -95,43 +96,13 @@ public class WhatsappRepository {
         //Throw "Group does not exist" if the mentioned group does not exist
         //Throw "You are not allowed to send message" if the sender is not a member of the group
         //If the message is sent successfully, return the final number of messages in that group.
-//        boolean doesGroupExist = true;
-//        if (!adminMap.containsKey(group)){
-//            doesGroupExist = false;
-//            throw new Exception ("Group does not exist");
-//        }
-//
-//        boolean isSenderinGroup = false;
-//
-//
-//        List<User> users = groupUserMap.get(group);
-//        for (User user:users){
-//            if (user.equals(sender)){
-//                isSenderinGroup = true;
-//            }
-//        }
-//        if (!isSenderinGroup){
-//            throw new Exception("You are not allowed to send message");
-//        }
-//        if (doesGroupExist && isSenderinGroup) {
-//
-//            if (groupMessageMap.get(group).size() == 0){
-//                List<Message> messages = new ArrayList<>();
-//                messages.add(message);
-//                groupMessageMap.get(group).add(message);
-//            }else {
-//                groupMessageMap.get(group).add(message);
-//            }
-//
-//            senderMap.put(message, sender);
-////            groupMessageMap.put(group, messages);
-//        }
-//        return groupMessageMap.get(group).size();
+
+
         if (!adminMap.containsKey(group)){
             throw new Exception("Group does not exist");
         }
 
-        List<User> users = new ArrayList<>();
+        List<User> users = null;
         if (groupUserMap.containsKey(group)){
             users = groupUserMap.get(group);
         }
@@ -149,7 +120,7 @@ public class WhatsappRepository {
 
         if (isSenderinGroup) {
             if (groupMessageMap.containsKey(group)){
-                if (groupMessageMap.get(group).size() == 0) {
+                if (groupMessageMap.get(group) == null) {
                     List<Message> messages = new ArrayList<>();
                     messages.add(message);
                     groupMessageMap.get(group).add(message);
@@ -201,6 +172,10 @@ public class WhatsappRepository {
     }
 
     public String findMessage(Date start, Date end, int k) {
-        return "MIL GAYA";
+        return "";
     }
+
+
+
+
 }
